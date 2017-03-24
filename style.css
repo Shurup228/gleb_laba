@@ -1,0 +1,17 @@
+div {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+#piles, #turn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
