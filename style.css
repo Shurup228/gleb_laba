@@ -1,17 +1,31 @@
+* {
+  padding: 3px;
+  margin: 7px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+}
+
 div {
   display: flex;
   flex-grow: 1;
   justify-content: center;
 }
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: stretch;
+
+#piles div, #turns div {
+  background-color: rgba(211, 211, 211, 0.5);
+  flex-grow: 1;
+  transition-duration: 0.5s;
 }
 
-#piles, #turn {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+#piles div:hover, #turns div:hover {
+  transform: scale(1.05, 1.05);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#control {
+
 }
