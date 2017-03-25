@@ -6,14 +6,14 @@ const TURN_AMOUNT = [1, 2, 3];
 const pilesDiv = document.getElementById('piles');
 const turnsDiv = document.getElementById('turns');
 
-{
+{ // Layout things
   for (let i = 0; i < PILE_AMOUNT; i++) {
     let pile = document.createElement('div');
     let text = document.createElement('p');
 
-    text.innerHTML = `Pile #${i + 1}`;
     pile.dataset.rocks = ROCK_AMOUNT;
-    pile.dataset.num = i + 1;
+    pile.dataset.num = i + 1; // For differentiating piles
+    text.innerHTML = `Pile #${i + 1}`;
 
     pile.appendChild(text);
     pilesDiv.appendChild(pile);
@@ -24,7 +24,7 @@ const turnsDiv = document.getElementById('turns');
     let text = document.createElement('p');
 
     turn.dataset.turn = elem;
-    turn.dataset.num = index + 1;
+    turn.dataset.num = index + 1; // Also for differentiating
     text.innerHTML = 'I\'m a turn';
 
     turn.appendChild(text);
@@ -32,7 +32,7 @@ const turnsDiv = document.getElementById('turns');
   });
 }
 
-{
+{ // Some logic things related to selection of piles and turns
   const piles = document.querySelectorAll('div[data-rocks]');
   const turns = document.querySelectorAll('div[data-turn]');
 
