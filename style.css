@@ -15,9 +15,9 @@ div {
   justify-content: center;
 }
 
-#piles div, #turns div {
+#piles div, #turns div, #control div {
   background-color: rgba(211, 211, 211, 0.5);
-  flex-grow: 1;
+  align-items: center;
   transition-duration: 0.5s;
 }
 
@@ -26,6 +26,6 @@ div {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#control {
-
+#control div:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

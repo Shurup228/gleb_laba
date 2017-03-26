@@ -3,8 +3,9 @@
 const PILE_AMOUNT = 5;
 const ROCK_AMOUNT = 42;
 const TURN_AMOUNT = [1, 2, 3];
-const pilesDiv = document.getElementById('piles');
-const turnsDiv = document.getElementById('turns');
+const PILES_DIV = document.getElementById('piles');
+const TURNS_DIV = document.getElementById('turns');
+const BUTTON = document.querySelector('#control div');
 
 { // Layout things
   for (let i = 0; i < PILE_AMOUNT; i++) {
@@ -16,7 +17,7 @@ const turnsDiv = document.getElementById('turns');
     text.innerHTML = `Pile #${i + 1}`;
 
     pile.appendChild(text);
-    pilesDiv.appendChild(pile);
+    PILES_DIV.appendChild(pile);
   }
 
   TURN_AMOUNT.forEach((elem, index) => {
@@ -28,7 +29,7 @@ const turnsDiv = document.getElementById('turns');
     text.innerHTML = 'I\'m a turn';
 
     turn.appendChild(text);
-    turnsDiv.appendChild(turn);
+    TURNS_DIV.appendChild(turn);
   });
 }
 
@@ -36,11 +37,11 @@ const turnsDiv = document.getElementById('turns');
   const piles = document.querySelectorAll('div[data-rocks]');
   const turns = document.querySelectorAll('div[data-turn]');
 
-  function hide(elem) {
+  function remove(elem) {
     elem.style.transform = 'scale(1, 1)';
   }
 
-  function show(elem) {
+  function select(elem) {
     elem.style.transform = 'scale(1.05, 1.05)';
   }
 
@@ -51,24 +52,34 @@ const turnsDiv = document.getElementById('turns');
         if (el === elem) {
           if (el.style.transform === 'scale(1.05, 1.05)') {
             parent.dataset.chosen = '';
-            hide(el);
+            remove(el);
             return;
           }
 
           parent.dataset.chosen = el.dataset.num;
-          show(el);
+          select(el);
         } else {
-          hide(el);
+          remove(el);
         }
       });
     });
   }
 
   piles.forEach((elem) => {
-    action(elem, piles, pilesDiv);
+    action(elem, piles, PILES_DIV);
   });
 
   turns.forEach((elem) => {
-    action(elem, turns, turnsDiv);
+    action(elem, turns, TURNS_DIV);
+  });
+}
+
+{ // Button things (For now here only styles)
+  BUTTON.addEventListener('mousedown', function (event) {
+    BUTTON.style.boxShadow = 'inset 0px 4px 8px 0px rgba(0,0,0,0.5)';
+  });
+
+  BUTTON.addEventListener('mouseup', function (event) {
+    BUTTON.style.boxShadow = '';
   });
 }
