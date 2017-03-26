@@ -16,6 +16,19 @@ div {
   border-radius: 5px;
 }
 
+#control {
+  padding: 0;
+  align-items: stretch;
+}
+
+#control div {
+  flex-grow: 0.1;
+}
+
+#piles, #turns {
+  margin-bottom: 5%;
+}
+
 #piles div, #turns div, #control div {
   background-color: rgba(211, 211, 211, 0.5);
   align-items: center;
