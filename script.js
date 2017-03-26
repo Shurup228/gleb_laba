@@ -39,10 +39,14 @@ const BUTTON = document.querySelector('#control div');
 
   function remove(elem) {
     elem.style.transform = 'scale(1, 1)';
+    elem.style.boxShadow = '';
+    elem.style.backgroundColor = 'rgba(211, 211, 211, 0.5)';
   }
 
   function select(elem) {
     elem.style.transform = 'scale(1.05, 1.05)';
+    elem.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)';
+    elem.style.backgroundColor = 'white';
   }
 
   function action(elem, divs, parent) {
