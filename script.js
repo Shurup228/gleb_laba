@@ -36,14 +36,21 @@ function updateAll(data) {
       remove(elem);
     });
   });
+
+  PILES_DIV.dataset.chosen = '';
+  TURNS_DIV.dataset.chosen = '';
 }
 
 function showToolTip() {
-  RULES_DIV.style.display = 'block';
+  for (let i = 1; i < 27; i++) {
+    RULES_DIV.style.bottom = `${-25 + i}%`;
+  }
 }
 
 function hideToolTip() {
-  RULES_DIV.style.display = 'none';
+  for (let i = 1; i < 27; i++) {
+    RULES_DIV.style.bottom = `${1 - i}%`;
+  }
 }
 
 { // Layout things
