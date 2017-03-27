@@ -7,14 +7,34 @@ const PILES_DIV = document.getElementById('piles');
 const TURNS_DIV = document.getElementById('turns');
 const BUTTON = document.querySelector('#control div');
 
+function remove(elem) {
+  elem.style.transform = 'scale(1, 1)';
+  elem.style.boxShadow = '';
+  elem.style.backgroundColor = 'rgba(211, 211, 211, 0.5)';
+}
+
+function select(elem) {
+  elem.style.transform = 'scale(1.05, 1.05)';
+  elem.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)';
+  elem.style.backgroundColor = 'white';
+}
+
 // Example of data: {'pile 1': 30, 'pile 2': 42}
 function updateAll(data) {
   const piles = document.querySelectorAll('div[data-rocks]');
+  const turns = document.querySelectorAll('div[data-turn]');
+
   for (let pileNum in data) {
     let pile = PILES_DIV.querySelector(`div[data-num="${pileNum.split(' ')[1]}"]`);
     pile.childNodes[1].innerHTML = data[pileNum];
     pile.dataset.rocks = data[pileNum];
   }
+
+  [piles, turns].forEach((elem) => {
+    elem.forEach((elem) => {
+      remove(elem);
+    });
+  });
 }
 
 { // Layout things
@@ -50,18 +70,6 @@ function updateAll(data) {
 { // Some logic things related to selection of piles and turns
   const piles = document.querySelectorAll('div[data-rocks]');
   const turns = document.querySelectorAll('div[data-turn]');
-
-  function remove(elem) {
-    elem.style.transform = 'scale(1, 1)';
-    elem.style.boxShadow = '';
-    elem.style.backgroundColor = 'rgba(211, 211, 211, 0.5)';
-  }
-
-  function select(elem) {
-    elem.style.transform = 'scale(1.05, 1.05)';
-    elem.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)';
-    elem.style.backgroundColor = 'white';
-  }
 
   function action(elem, divs, parent) {
     elem.addEventListener('click', function (event) {
@@ -106,12 +114,11 @@ function updateAll(data) {
     const chosenPile = PILES_DIV.querySelector(`div[data-num="${PILES_DIV.dataset.chosen}"]`);
     const rocksTurn = TURNS_DIV.querySelector(`div[data-num="${TURNS_DIV.dataset.chosen}"]`);
     const rocksTaken = rocksTurn.dataset.turn;
-    console.log(piles, chosenPile, rocksTurn, rocksTaken);
 
     let data = {};
     piles.forEach((elem) => {
-      console.log(elem);
       let next = elem.dataset.rocks;
+
       if (elem == chosenPile) {
         next -= rocksTaken;
       }
@@ -119,7 +126,6 @@ function updateAll(data) {
       data[`pile ${elem.dataset.num}`] = next;
     });
 
-    console.log(data);
     updateAll(data);
   });
 }
