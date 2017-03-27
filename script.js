@@ -7,16 +7,30 @@ const PILES_DIV = document.getElementById('piles');
 const TURNS_DIV = document.getElementById('turns');
 const BUTTON = document.querySelector('#control div');
 
+// Example of data: {'pile 1': 30, 'pile 2': 42}
+function updateAll(data) {
+  const piles = document.querySelectorAll('div[data-rocks]');
+  for (let pileNum in data) {
+    let pile = PILES_DIV.querySelector(`div[data-num="${pileNum.split(' ')[1]}"]`);
+    pile.childNodes[1].innerHTML = data[pileNum];
+    pile.dataset.rocks = data[pileNum];
+  }
+}
+
 { // Layout things
   for (let i = 0; i < PILE_AMOUNT; i++) {
     let pile = document.createElement('div');
     let text = document.createElement('p');
+    let num = document.createElement('p');
+    let hr = document.createElement('hr');
 
     pile.dataset.rocks = ROCK_AMOUNT;
     pile.dataset.num = i + 1; // For differentiating piles
     text.innerHTML = `Pile #${i + 1}`;
+    num.innerHTML = `<b>${ROCK_AMOUNT}</b>`;
 
     pile.appendChild(text);
+    pile.appendChild(num);
     PILES_DIV.appendChild(pile);
   }
 
@@ -26,7 +40,7 @@ const BUTTON = document.querySelector('#control div');
 
     turn.dataset.turn = elem;
     turn.dataset.num = index + 1; // Also for differentiating
-    text.innerHTML = 'I\'m a turn';
+    text.innerHTML = `Take <b>${elem}</b>`;
 
     turn.appendChild(text);
     TURNS_DIV.appendChild(turn);
@@ -83,7 +97,29 @@ const BUTTON = document.querySelector('#control div');
     BUTTON.style.boxShadow = 'inset 0px 4px 8px 0px rgba(0,0,0,0.5)';
   });
 
-  BUTTON.addEventListener('mouseup', function (event) {
+  document.body.addEventListener('mouseup', function (event) {
     BUTTON.style.boxShadow = '';
+  });
+
+  BUTTON.addEventListener('click', function (event) {
+    const piles = document.querySelectorAll('div[data-rocks]');
+    const chosenPile = PILES_DIV.querySelector(`div[data-num="${PILES_DIV.dataset.chosen}"]`);
+    const rocksTurn = TURNS_DIV.querySelector(`div[data-num="${TURNS_DIV.dataset.chosen}"]`);
+    const rocksTaken = rocksTurn.dataset.turn;
+    console.log(piles, chosenPile, rocksTurn, rocksTaken);
+
+    let data = {};
+    piles.forEach((elem) => {
+      console.log(elem);
+      let next = elem.dataset.rocks;
+      if (elem == chosenPile) {
+        next -= rocksTaken;
+      }
+
+      data[`pile ${elem.dataset.num}`] = next;
+    });
+
+    console.log(data);
+    updateAll(data);
   });
 }

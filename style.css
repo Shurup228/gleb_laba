@@ -10,6 +10,7 @@ body {
 }
 
 div {
+  user-select: none;
   display: flex;
   flex-grow: 1;
   justify-content: center;
@@ -33,6 +34,7 @@ div {
   background-color: rgba(211, 211, 211, 0.5);
   align-items: center;
   transition-duration: 0.5s;
+  flex-direction: column;
 }
 
 #piles div:hover, #turns div:hover {
