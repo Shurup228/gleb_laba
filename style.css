@@ -45,3 +45,16 @@ div {
 #control div:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+#rules {
+  padding: 1%;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  position: fixed;
+  right: 1%;
+  bottom: 1%;
+  z-index: 2;
+  display: none;
+  background-color: rgba(211, 211, 211, 0.5);
+  transition-duration: 0.5s;
+}

@@ -6,6 +6,7 @@ const TURN_AMOUNT = [1, 2, 3];
 const PILES_DIV = document.getElementById('piles');
 const TURNS_DIV = document.getElementById('turns');
 const BUTTON = document.querySelector('#control div');
+const RULES_DIV = document.getElementById('rules');
 
 function remove(elem) {
   elem.style.transform = 'scale(1, 1)';
@@ -35,6 +36,14 @@ function updateAll(data) {
       remove(elem);
     });
   });
+}
+
+function showToolTip() {
+  RULES_DIV.style.display = 'block';
+}
+
+function hideToolTip() {
+  RULES_DIV.style.display = 'none';
 }
 
 { // Layout things
@@ -100,7 +109,7 @@ function updateAll(data) {
   });
 }
 
-{ // Button things (For now here only styles)
+{ // Button things
   BUTTON.addEventListener('mousedown', function (event) {
     BUTTON.style.boxShadow = 'inset 0px 4px 8px 0px rgba(0,0,0,0.5)';
   });
@@ -110,6 +119,12 @@ function updateAll(data) {
   });
 
   BUTTON.addEventListener('click', function (event) {
+    if (!PILES_DIV.dataset.chosen || !TURNS_DIV.dataset.chosen) {
+      showToolTip();
+      setTimeout(hideToolTip, 10000);
+      return;
+    }
+
     const piles = document.querySelectorAll('div[data-rocks]');
     const chosenPile = PILES_DIV.querySelector(`div[data-num="${PILES_DIV.dataset.chosen}"]`);
     const rocksTurn = TURNS_DIV.querySelector(`div[data-num="${TURNS_DIV.dataset.chosen}"]`);
