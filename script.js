@@ -34,10 +34,8 @@ function updateAll(data) {
   [PILES_DIV, TURNS_DIV].forEach((div) => {
     const toHide = document.querySelector(`#${div.id} div[data-num="${div.dataset.chosen}"]`);
     remove(toHide);
+    div.dataset.chosen = '';
   });
-
-  PILES_DIV.dataset.chosen = '';
-  TURNS_DIV.dataset.chosen = '';
 }
 
 function showToolTip() {
