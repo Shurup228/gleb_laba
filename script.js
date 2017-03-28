@@ -7,6 +7,7 @@ const PILES_DIV = document.getElementById('piles');
 const TURNS_DIV = document.getElementById('turns');
 const BUTTON = document.querySelector('#control div');
 const RULES_DIV = document.getElementById('rules');
+const P = document.querySelector('#rules p');
 
 function remove(elem) {
   elem.style.transform = 'scale(1, 1)';
@@ -38,10 +39,27 @@ function updateAll(data) {
   });
 }
 
+function countdown() {
+  let counter = 10;
+  let s = 'This message will hide after';
+
+  let id = setInterval(function () {
+    counter -= 1;
+    P.innerHTML = s + ` ${counter} sec`;
+  }, 1000);
+
+  setTimeout(() => {
+    clearInterval(id);
+    setTimeout(() => P.innerHTML = s + ' 10 sec', 100);
+  }, 10005);
+}
+
 function showToolTip() {
   for (let i = 1; i < 27; i++) {
     RULES_DIV.style.bottom = `${-25 + i}%`;
   }
+
+  countdown();
 }
 
 function hideToolTip() {
