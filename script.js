@@ -62,7 +62,7 @@ function hideToolTip() {
 
     pile.dataset.rocks = ROCK_AMOUNT;
     pile.dataset.num = i + 1; // For differentiating piles
-    text.innerHTML = `Pile #${i + 1}`;
+    text.innerHTML = `Pile ${i + 1}`;
     num.innerHTML = `<b>${ROCK_AMOUNT}</b>`;
 
     pile.appendChild(text);
