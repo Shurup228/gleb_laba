@@ -31,10 +31,9 @@ function updateAll(data) {
     pile.dataset.rocks = data[pileNum];
   }
 
-  [piles, turns].forEach((elem) => {
-    elem.forEach((elem) => {
-      remove(elem);
-    });
+  [PILES_DIV, TURNS_DIV].forEach((div) => {
+    const toHide = document.querySelector(`#${div.id} div[data-num="${div.dataset.chosen}"]`);
+    remove(toHide);
   });
 
   PILES_DIV.dataset.chosen = '';
